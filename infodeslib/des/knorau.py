@@ -109,8 +109,8 @@ class KNORAU:
             competence_acc_list.append(accuracy)
             average_correct_probs_list.append(average_correct_probs) 
             
-            if self.plot: 
-                print("Model {} Accuracy: {} (Conf: {})".format(i, accuracy, average_correct_probs))
+
+            # print("Model {} Accuracy: {} (Conf: {})".format(i, accuracy, average_correct_probs))
             
         self.correct_probs = average_correct_probs_list 
         
@@ -203,7 +203,7 @@ class KNORAU:
     Gives final prediction.  
      
     """  
-    def predict(self, query, y_true): 
+    def predict(self, query, y_true=None): 
         predictions = [] 
         
         # 1) define region of competence 
@@ -237,7 +237,8 @@ class KNORAU:
 
  
         if self.plot: 
-            print("[True Label]: {}".format(y_true)) 
+            if y_true: 
+            	print("[True Label]: {}".format(y_true)) 
             print("========================================================") 
         
-        return prediction, conf, conf_list   
+        return prediction, conf   

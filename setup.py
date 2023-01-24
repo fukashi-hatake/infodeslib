@@ -1,34 +1,29 @@
-from setuptools import setup, find_packages
 import codecs
 import os
+from distutils.core import setup
 
-here = os.path.abspath(os.path.dirname(__file__))
+from setuptools import find_packages
 
-with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
-    long_description = "\n" + fh.read()
+setup_path = os.path.abspath(os.path.dirname(__file__))
+with codecs.open(os.path.join(setup_path, 'README.md'), encoding='utf-8-sig') as f:
+    README = f.read()
 
-VERSION = '0.0.1'
-DESCRIPTION = 'Dynamic Ensembple Selection Library for Classification with Late fusion setting.'
-LONG_DESCRIPTION = 'Dynamic Ensembple Selection Library for Classification with Late fusion setting.' 
+setup(name='infodeslib',
+      version='0.0.5',
+      url='https://github.com/fukashi-hatake/infodeslib',
+      maintainer='Firuz Juraev',
+      maintainer_email='f.i.juraev@gmail.com',
+      description='Implementation of Dynamic Ensemble Selection methods for Late Fusion',
+      long_description=README,
+      author='Firuz Juraev',
+      author_email='f.i.juraev@gmail.com',
+      license='MIT',
 
-# Setting up
-setup(
-    name="infodeslib",
-    version=VERSION,
-    author="Firuz Juraev",
-    author_email="<f.i.juraev@gmail.com>",
-    description=DESCRIPTION,
-    long_description_content_type="text/markdown",
-    long_description=long_description,
-    packages=find_packages(),
-    install_requires=['sklearn', 'matplotlib', 'numpy'],
-    keywords=['python', 'des', 'classification', 'latefusion'],
-    classifiers=[
-        "Development Status :: First release",
-        "Intended Audience :: Researchers",
-        "Programming Language :: Python :: 3",
-        "Operating System :: Unix",
-        "Operating System :: MacOS :: MacOS X",
-        "Operating System :: Microsoft :: Windows",
-    ]
-)
+      install_requires=[
+          'scikit-learn>=0.21.0',
+          'numpy>=1.17.0',
+          'scipy>=1.4.0',
+      ],
+      python_requires='>=3',      
+
+      packages=find_packages())
