@@ -6,7 +6,7 @@
 pip install infodeslib
 ```
 
-# A little example 
+### Example 
 
 Loading necessary libraries and dataset:  
 
@@ -61,3 +61,61 @@ feature_sets = [feature_set1,
                 feature_set2, 
                 feature_set3] 
 ```
+
+2. Train the models (pool): 
+
+```python 
+for i in range(len(model_pool)): 
+    model_pool[i].fit(X_pool[feature_sets[i]], y_pool)
+    
+    acc = round(model_pool[i].score(X_dsel[feature_sets[i]], y_dsel), 3) 
+    print("[DSEL] Model {} acc: {}".format(i, acc)) 
+
+    acc = round(model_pool[i].score(X_test[feature_sets[i]], y_test), 3)  
+    print("[Test] Model {} acc: {}".format(i, acc))  
+```
+
+3. Usage of our library: 
+
+```python
+from infodeslib.des.knorau import KNORAU 
+
+colors = {0: 'red', 1: 'green'}  
+
+# initializing 
+knorau = KNORAU(model_pool, feature_sets, k=7,  
+                DFP=True, plot=False, X_dsel=X_dsel, y_dsel=y_dsel, colors=colors)
+``` 
+
+4. Testing 
+
+```python 
+from tqdm import tqdm 
+
+preds = [] 
+
+for i in tqdm(range(X_test.shape[0])):
+    query = X_test.iloc[[i]] 
+    
+    pred, conf = knorau.predict(query)
+    preds.append(pred) 
+    
+
+acc = round(accuracy_score(y_test, preds), 3) 
+print("[Test] acc: {}".format(acc))
+```
+
+5. Explainability 
+
+```python 
+colors = {0: 'red', 1: 'green'}  
+
+## Make plot=True 
+knorau = KNORAU(model_pool, feature_sets, k=7,  
+                DFP=True, plot=True, X_dsel=X_dsel, y_dsel=y_dsel, colors=colors)
+
+query = X_test.iloc[[5]]
+
+knorau.predict(query, y_test.iloc[5])
+```
+
