@@ -1,20 +1,24 @@
 import codecs
 import os
+from pathlib import Path
 from distutils.core import setup
 
 from setuptools import find_packages
 
-setup_path = os.path.abspath(os.path.dirname(__file__))
-with codecs.open(os.path.join(setup_path, 'README.md'), encoding='utf-8-sig') as f:
-    README = f.read()
+THIS_DIRECTORY = Path(__file__).parent 
+
+readme_path = THIS_DIRECTORY / ".." / "README.md"
+if readme_path.exists():
+    long_description = readme_path.read_text() 
 
 setup(name='infodeslib',
-      version='0.0.5',
+      version='0.0.6',
       url='https://github.com/fukashi-hatake/infodeslib',
       maintainer='Firuz Juraev',
       maintainer_email='f.i.juraev@gmail.com',
-      description='Implementation of Dynamic Ensemble Selection methods for Late Fusion',
-      long_description=README,
+      description='Implementation of Dynamic Ensemble Selection methods with Late Fusion',
+      long_description=long_description,
+      long_description_content_type="text/markdown",
       author='Firuz Juraev',
       author_email='f.i.juraev@gmail.com',
       license='MIT',

@@ -237,7 +237,7 @@ class KNORAU:
 
  
         if self.plot: 
-            if y_true: 
+            if y_true != None: 
             	print("[True Label]: {}".format(y_true)) 
             print("========================================================") 
         

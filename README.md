@@ -114,8 +114,12 @@ colors = {0: 'red', 1: 'green'}
 knorau = KNORAU(model_pool, feature_sets, k=7,  
                 DFP=True, plot=True, X_dsel=X_dsel, y_dsel=y_dsel, colors=colors)
 
-query = X_test.iloc[[5]]
-
-knorau.predict(query, y_test.iloc[5])
 ```
 
+```python 
+index = 18
+query = X_test.iloc[[index]]
+
+knorau.predict(query, y_test.iloc[index])
+```
+<img src="https://raw.githubusercontent.com/fukashi-hatake/infodeslib/main/images/example.PNG" width="50%" height="50%">  
